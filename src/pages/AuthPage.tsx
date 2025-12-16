@@ -108,7 +108,21 @@ const SignUpForm = () => {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [errors, setErrors] = useState<Errors>({});
 
+  const isFormValid = (): boolean => {
+    return Boolean(
+      username.trim() &&
+        firstName.trim() &&
+        lastName.trim() &&
+        password.length >= 8 &&
+        confirmPassword === password 
+        // Object.keys(errors).length <= 0
+    );
+  };
+
+  console.log("isFormValid: ", isFormValid());
+
   const handleSubmit = (e: React.FormEvent) => {
+    console.log("Triggered");
     e.preventDefault();
     const newErrors: Errors = {};
 
@@ -122,6 +136,15 @@ const SignUpForm = () => {
 
     if (Object.keys(newErrors).length > 0) return;
 
+    const errs = [
+      username,
+      firstName,
+      lastName,
+      password,
+      confirmPassword,
+    ].filter((itemValue) => itemValue.trim() !== "").length;
+
+    console.log("ERRS:", errs);
     console.log("Sign Up Valid");
   };
 
@@ -129,8 +152,7 @@ const SignUpForm = () => {
     <AuthForm onSubmit={handleSubmit} title="Create new account">
       {/* Signup Input: First Name */}
       <TextField
-        inputProps={{ className: "mb-3 py-1" }}
-        id="standard-basic"
+        InputProps={{ className: "mb-3 py-1" }}
         label="First Name"
         variant="standard"
         value={firstName}
@@ -151,8 +173,7 @@ const SignUpForm = () => {
       />
       {/* Signup Input: last name */}
       <TextField
-        inputProps={{ className: "mb-3 py-1" }}
-        id="standard-basic"
+        InputProps={{ className: "mb-3 py-1" }}
         label="Last Name"
         variant="standard"
         value={lastName}
@@ -174,7 +195,6 @@ const SignUpForm = () => {
       {/* Signup input: Username */}
       <TextField
         InputProps={{ className: "mb-3 py-1" }}
-        id="standard-basic"
         label="Username"
         variant="standard"
         value={username}
@@ -196,7 +216,6 @@ const SignUpForm = () => {
       <TextField
         InputProps={{ className: "mb-3 py-1" }}
         className=""
-        id="signup-form"
         label="New Password"
         variant="standard"
         type="password"
@@ -224,7 +243,6 @@ const SignUpForm = () => {
       <TextField
         InputProps={{ className: "mb-3 py-1" }}
         className=""
-        id="standard-basic"
         label="Confirm Password"
         variant="standard"
         type="password"
@@ -248,8 +266,10 @@ const SignUpForm = () => {
       <Button
         sx={{ py: 1.5, mt: 1, backgroundColor: "#28A56A" }}
         variant="contained"
+        disabled={!isFormValid()}
+        type="submit"
       >
-        LOGIN
+        SIGN UP
       </Button>
     </AuthForm>
   );
