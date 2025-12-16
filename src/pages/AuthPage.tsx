@@ -26,7 +26,7 @@ const AuthForm = ({ title, onSubmit, children }: AuthFormProps) => {
   return (
     <form
       onSubmit={onSubmit}
-      className="w-full px-1 max-w-[500px] flex flex-col justify-center items-stretch"
+      className="w-full px-1 max-w-[400px] flex flex-col justify-center items-stretch"
     >
       <div className="w-full flex mb-5">
         <h1 className="text-blue-600 font-bold text-3xl">{title}</h1>
@@ -62,19 +62,7 @@ const SignInForm = () => {
   };
   return (
     <AuthForm onSubmit={handleSubmit} title="Log in to your account">
-      {/* <TextField
-        InputProps={{ className: "mb-5 py-1" }}
-        id="standard"
-        label="Username"
-        variant="standard"
-        value={username}
-        onChange={(e) => {
-          setUsername(e.target.value);
-          setErrors((prev) => ({ ...prev, username: undefined }));
-        }}
-        error={!!errors.username}
-        helperText={errors.username}
-      /> */}
+      {/* Signin: Email */}
       <TextField
         inputProps={{ className: "mb-5 py-1" }}
         variant="standard"
@@ -84,7 +72,11 @@ const SignInForm = () => {
           setEmail(e.target.value);
           setErrors((prev) => ({ ...prev, email: undefined }));
         }}
+        error={!!errors.email}
+        helperText={errors.email}
       />
+
+      {/* Signin: Password */}
       <TextField
         InputProps={{ className: "mb-5 py-1" }}
         className=""
@@ -185,6 +177,7 @@ const SignUpForm = () => {
         error={!!errors.firstName}
         helperText={errors.firstName}
       />
+
       {/* Signup Input: Last Name */}
       <TextField
         InputProps={{ className: "mb-3 py-1" }}
@@ -225,12 +218,12 @@ const SignUpForm = () => {
             }));
           }
         }}
-        error={!!errors.username}
-        helperText={errors.username}
+        error={!!errors.email}
+        helperText={errors.email}
       />
       {/* Signup input: Username */}
       <TextField
-        InputProps={{ className: "mb-3 py-1" }}
+        InputProps={{ className: "mb-5 py-1" }}
         label="Username"
         variant="standard"
         value={username}
@@ -249,8 +242,9 @@ const SignUpForm = () => {
         error={!!errors.username}
         helperText={errors.username}
       />
+      {/* Signup input: New Password */}
       <TextField
-        InputProps={{ className: "mb-3 py-1" }}
+        InputProps={{ className: "mb-5 py-1" }}
         className=""
         label="New Password"
         variant="standard"
@@ -276,8 +270,10 @@ const SignUpForm = () => {
         error={!!errors.password}
         helperText={errors.password}
       />
+      {/* Signup input: Confirm Password */}
       <TextField
-        InputProps={{ className: "mb-3 py-1" }}
+        size="small"
+        InputProps={{ className: "mb-5 py-1" }}
         className=""
         label="Confirm Password"
         variant="standard"
@@ -291,7 +287,7 @@ const SignUpForm = () => {
           if (confirmPassword.trim() !== password) {
             setErrors((prev) => ({
               ...prev,
-              confirmPassword: "Password does not match",
+              confirmPassword: "Passwords don't match",
             }));
           }
         }}
@@ -299,6 +295,7 @@ const SignUpForm = () => {
         helperText={errors.confirmPassword}
         disabled={!!errors.password || !password}
       />
+
       <Button
         sx={{ py: 1.5, mt: 1, backgroundColor: "#28A56A" }}
         variant="contained"
@@ -319,9 +316,10 @@ function AuthPage() {
 
   return (
     <div className="flex justify-stretch items-stretch w-full h-full bg-blue-500">
+      {/* Left Half */}
       {windowWidth > 600 && (
         <div
-          className="w-full max-w-1/2 h-screen bg-gray-50 bg-cover flex justify-center items-center flex-col"
+          className="w-full resize max-w-1/2 h-screen bg-gray-50 bg-cover flex justify-center items-center flex-col"
           style={{ backgroundImage: `url(${images.signInBg})` }}
         >
           <div className="w-fit">
@@ -335,30 +333,52 @@ function AuthPage() {
           </div>
         </div>
       )}
+
+      {/* Right Half (Form) */}
       <div
-        className="h-screen px-10 w-full bg-white flex flex-col justify-center items-center bg-size-[300%] bg-center"
+        className="min-h-screen h-fit w-full bg-white flex flex-col justify-center items-center bg-size-[300%] bg-center relative"
         style={{
           backgroundImage: windowWidth <= 300 ? `url(${images.signInBg})` : "",
         }}
       >
-        {formMode === "signIn" ? <SignInForm /> : <SignUpForm />}
-        <h3
-          onClick={() =>
-            setFormMode((prevMode) =>
-              prevMode === "signIn" ? "signUp" : "signIn"
-            )
-          }
-          className="text-blue-700 cursor-pointer mt-5 hover:underline"
-        >
-          {formMode === "signIn"
-            ? "Create account"
-            : "Already have an account?"}
-        </h3>
-        {formMode === "signIn" && (
-          <h3 className="text-blue-700 absolute bottom-[5%] hover:underline cursor-pointer">
-            Forgot Password?
-          </h3>
+        {/* Mobile banner */}
+        {windowWidth <= 400 && (
+          <div
+            className="sticky left-0 top-0 flex flex-col justify-stretch items-center font-black text-3xl h-[20%] w-full p-5 py-3 bg-center bg-cover bg-no-repeat z-50"
+            style={{ backgroundImage: `url(${images.signInBg})` }}
+          >
+            <h2>LearnTrack</h2>
+            <p className="text-xs text-center m-2 font-normal">
+              Track your learning. Organize your skills. <br />
+              See your progress
+            </p>
+          </div>
         )}
+        {/* Contents */}
+        <div className="flex flex-col justify-center items-center w-full max-h-screen overflow-y-auto z-0 px-10 border py-10 box-border">
+          <div className="flex flex-col justify-center items-center min-w-full max-h-[70%] h-screen min-h-fit box-border overflow-y-auto">
+            {formMode === "signIn" ? <SignInForm /> : <SignUpForm />}
+            <h3
+              onClick={() =>
+                setFormMode((prevMode) =>
+                  prevMode === "signIn" ? "signUp" : "signIn"
+                )
+              }
+              className="text-blue-500 cursor-pointer mt-5 hover:underline active:underline active:translate-y-1"
+            >
+              {formMode === "signIn"
+                ? "Create account"
+                : "Already have an account?"}
+            </h3>
+          </div>
+          <div className=" w-full h-fit translate-y-10">
+            {formMode === "signIn" && (
+              <h3 className="text-blue-500 bottom-[5%] hover:underline cursor-pointer">
+                Forgot Password?
+              </h3>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
