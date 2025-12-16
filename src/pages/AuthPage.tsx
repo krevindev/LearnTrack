@@ -38,7 +38,8 @@ const AuthForm = ({ title, onSubmit, children }: AuthFormProps) => {
 
 // Sign in Form contents
 const SignInForm = () => {
-  const [username, setUsername] = useState<string>("");
+  // const [username, setUsername] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [errors, setErrors] = useState<Errors>({});
 
@@ -47,8 +48,8 @@ const SignInForm = () => {
 
     const newErrors: Errors = {};
 
-    if (!username.trim()) {
-      newErrors.username = "Username is required";
+    if (!email.trim()) {
+      newErrors.username = "Email is required";
     }
     if (!password) {
       newErrors.password = "Password is required";
@@ -61,7 +62,7 @@ const SignInForm = () => {
   };
   return (
     <AuthForm onSubmit={handleSubmit} title="Log in to your account">
-      <TextField
+      {/* <TextField
         InputProps={{ className: "mb-5 py-1" }}
         id="standard"
         label="Username"
@@ -73,11 +74,20 @@ const SignInForm = () => {
         }}
         error={!!errors.username}
         helperText={errors.username}
+      /> */}
+      <TextField
+        inputProps={{ className: "mb-5 py-1" }}
+        variant="standard"
+        type="email"
+        label="Email"
+        onChange={(e) => {
+          setEmail(e.target.value);
+          setErrors((prev) => ({ ...prev, email: undefined }));
+        }}
       />
       <TextField
         InputProps={{ className: "mb-5 py-1" }}
         className=""
-        id="standard-basic"
         label="Password"
         variant="standard"
         type="password"
