@@ -17,6 +17,7 @@ type Errors = {
   confirmPassword?: string;
   firstName?: string;
   lastName?: string;
+  email?: string;
 };
 // END: Types>
 
@@ -101,6 +102,7 @@ const SignInForm = () => {
 
 // Sign up Form Contents
 const SignUpForm = () => {
+  const [email, setEmail] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
@@ -113,9 +115,10 @@ const SignUpForm = () => {
       username.trim() &&
         firstName.trim() &&
         lastName.trim() &&
+        email.trim() &&
         password.length >= 8 &&
-        confirmPassword === password 
-        // Object.keys(errors).length <= 0
+        confirmPassword === password
+      // Object.keys(errors).length <= 0
     );
   };
 
@@ -140,6 +143,7 @@ const SignUpForm = () => {
       username,
       firstName,
       lastName,
+      email,
       password,
       confirmPassword,
     ].filter((itemValue) => itemValue.trim() !== "").length;
@@ -171,7 +175,7 @@ const SignUpForm = () => {
         error={!!errors.firstName}
         helperText={errors.firstName}
       />
-      {/* Signup Input: last name */}
+      {/* Signup Input: Last Name */}
       <TextField
         InputProps={{ className: "mb-3 py-1" }}
         label="Last Name"
@@ -191,6 +195,28 @@ const SignUpForm = () => {
         }}
         error={!!errors.lastName}
         helperText={errors.lastName}
+      />
+      {/* Signup input: Email */}
+      <TextField
+        InputProps={{ className: "mb-3 py-1" }}
+        label="Email"
+        variant="standard"
+        value={email}
+        type="email"
+        onChange={(e) => {
+          setEmail(e.target.value);
+          setErrors((prev) => ({ ...prev, email: undefined }));
+        }}
+        onBlur={() => {
+          if (!email.trim()) {
+            setErrors((prev) => ({
+              ...prev,
+              email: "Email is required",
+            }));
+          }
+        }}
+        error={!!errors.username}
+        helperText={errors.username}
       />
       {/* Signup input: Username */}
       <TextField
