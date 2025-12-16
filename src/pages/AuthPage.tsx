@@ -28,7 +28,7 @@ const AuthForm = ({ title, onSubmit, children }: AuthFormProps) => {
       onSubmit={onSubmit}
       className="w-full px-1 max-w-[500px] flex flex-col justify-center items-stretch"
     >
-      <div className="w-full flex mb-20">
+      <div className="w-full flex mb-5">
         <h1 className="text-blue-600 font-bold text-3xl">{title}</h1>
       </div>
       {children}
@@ -304,12 +304,12 @@ const SignUpForm = () => {
 type FormMode = "signIn" | "signUp";
 
 function AuthPage() {
-  const { width } = useWindowSize();
+  const { width: windowWidth } = useWindowSize();
   const [formMode, setFormMode] = useState<FormMode>("signIn");
 
   return (
     <div className="flex justify-stretch items-stretch w-full h-full bg-blue-500">
-      {width > 600 && (
+      {windowWidth > 600 && (
         <div
           className="w-full max-w-1/2 h-screen bg-gray-50 bg-cover flex justify-center items-center flex-col"
           style={{ backgroundImage: `url(${images.signInBg})` }}
@@ -328,7 +328,7 @@ function AuthPage() {
       <div
         className="h-screen px-10 w-full bg-white flex flex-col justify-center items-center bg-size-[300%] bg-center"
         style={{
-          backgroundImage: width <= 300 ? `url(${images.signInBg})` : "",
+          backgroundImage: windowWidth <= 300 ? `url(${images.signInBg})` : "",
         }}
       >
         {formMode === "signIn" ? <SignInForm /> : <SignUpForm />}
