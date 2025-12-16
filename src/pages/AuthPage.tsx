@@ -15,6 +15,8 @@ type Errors = {
   username?: string;
   password?: string;
   confirmPassword?: string;
+  firstName?: string;
+  lastName?: string;
 };
 // END: Types>
 
@@ -100,6 +102,8 @@ const SignInForm = () => {
 // Sign up Form Contents
 const SignUpForm = () => {
   const [username, setUsername] = useState<string>("");
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [errors, setErrors] = useState<Errors>({});
@@ -123,6 +127,51 @@ const SignUpForm = () => {
 
   return (
     <AuthForm onSubmit={handleSubmit} title="Create new account">
+      {/* Signup Input: First Name */}
+      <TextField
+        inputProps={{ className: "mb-3 py-1" }}
+        id="standard-basic"
+        label="First Name"
+        variant="standard"
+        value={firstName}
+        onChange={(e) => {
+          setFirstName(e.target.value);
+          setErrors((prev) => ({ ...prev, firstName: undefined }));
+        }}
+        onBlur={() => {
+          if (!firstName.trim()) {
+            setErrors((prev) => ({
+              ...prev,
+              firstName: "First name is required",
+            }));
+          }
+        }}
+        error={!!errors.firstName}
+        helperText={errors.firstName}
+      />
+      {/* Signup Input: last name */}
+      <TextField
+        inputProps={{ className: "mb-3 py-1" }}
+        id="standard-basic"
+        label="Last Name"
+        variant="standard"
+        value={lastName}
+        onChange={(e) => {
+          setLastName(e.target.value);
+          setErrors((prev) => ({ ...prev, lastName: undefined }));
+        }}
+        onBlur={() => {
+          if (!lastName.trim()) {
+            setErrors((prev) => ({
+              ...prev,
+              lastName: "Last name is required",
+            }));
+          }
+        }}
+        error={!!errors.lastName}
+        helperText={errors.lastName}
+      />
+      {/* Signup input: Username */}
       <TextField
         InputProps={{ className: "mb-3 py-1" }}
         id="standard-basic"
@@ -131,7 +180,7 @@ const SignUpForm = () => {
         value={username}
         onChange={(e) => {
           setUsername(e.target.value);
-          // setErrors((prev) => ({ ...prev, username: undefined }));
+          setErrors((prev) => ({ ...prev, username: undefined }));
         }}
         onBlur={() => {
           if (!username.trim()) {
