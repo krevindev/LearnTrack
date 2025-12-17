@@ -54,7 +54,8 @@ export default function SignUpForm() {
     };
 
     Object.keys(newErrors).forEach(
-      (key) => !newErrors[key as keyof Errors] && delete newErrors[key as keyof Errors]
+      (key) =>
+        !newErrors[key as keyof Errors] && delete newErrors[key as keyof Errors]
     );
 
     setErrors(newErrors);
@@ -65,11 +66,86 @@ export default function SignUpForm() {
 
   return (
     <AuthForm title="Create new account" onSubmit={handleSubmit}>
-      <FormInput label="First Name" value={form.firstName} error={errors.firstName} onChange={(v) => update("firstName", v)} />
-      <FormInput label="Last Name" value={form.lastName} error={errors.lastName} onChange={(v) => update("lastName", v)} />
-      <FormInput label="Email" type="email" value={form.email} error={errors.email} onChange={(v) => update("email", v)} />
-      <FormInput label="Username" value={form.username} error={errors.username} onChange={(v) => update("username", v)} />
-      <FormInput label="Password" type="password" value={form.password} error={errors.password} onChange={(v) => update("password", v)} />
+      <FormInput
+        label="First Name"
+        value={form.firstName}
+        error={errors.firstName}
+        onChange={(v) => update("firstName", v)}
+        onBlur={() => {
+          if (!form.firstName.trim()) {
+            setErrors((prev) => ({
+              ...prev,
+              firstName: "First name is required",
+            }));
+          }
+        }}
+      />
+      <FormInput
+        label="Last Name"
+        value={form.lastName}
+        error={errors.lastName}
+        onChange={(v) => update("lastName", v)}
+        onBlur={() => {
+          if (!form.lastName.trim()) {
+            setErrors((prev) => ({
+              ...prev,
+              lastName: "Last name is required",
+            }));
+          }
+        }}
+      />
+      <FormInput
+        label="Email"
+        type="email"
+        value={form.email}
+        error={errors.email}
+        onChange={(v) => update("email", v)}
+        onBlur={() => {
+          if (!form.email.trim()) {
+            setErrors((prev) => ({
+              ...prev,
+              email: "Email is required",
+            }));
+          }
+        }}
+      />
+      <FormInput
+        label="Username"
+        value={form.username}
+        error={errors.username}
+        onChange={(v) => update("username", v)}
+        onBlur={() => {
+          if (!form.username.trim()) {
+            setErrors((prev) => ({
+              ...prev,
+              username: "Username is required",
+            }));
+          }
+        }}
+      />
+      <FormInput
+        label="Password"
+        type="password"
+        value={form.password}
+        error={errors.password}
+        onChange={(v) => {
+          update("password", v);
+          if (form.password.trim() !== form.confirmPassword) {
+            setErrors((prev) => ({
+              ...prev,
+              confirmPassword: "Passwords do not match",
+            }));
+          }
+        }}
+        onBlur={() => {
+          if (!form.password.trim()) {
+            setErrors((prev) => ({
+              ...prev,
+              password: "Password is required",
+            }));
+          }
+        }}
+      />
       <FormInput
         label="Confirm Password"
         type="password"
@@ -77,6 +153,19 @@ export default function SignUpForm() {
         error={errors.confirmPassword}
         disabled={!form.password}
         onChange={(v) => update("confirmPassword", v)}
+        onBlur={() => {
+          if (!form.confirmPassword.trim()) {
+            setErrors((prev) => ({
+              ...prev,
+              confirmPassword: "Username is required",
+            }));
+          } else if (form.confirmPassword.trim() !== form.password) {
+            setErrors((prev) => ({
+              ...prev,
+              confirmPassword: "Passwords do not match",
+            }));
+          }
+        }}
       />
 
       <Button
