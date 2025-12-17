@@ -23,7 +23,8 @@ export default function SignInForm() {
     };
 
     Object.keys(newErrors).forEach(
-      (key) => !newErrors[key as keyof Errors] && delete newErrors[key as keyof Errors]
+      (key) =>
+        !newErrors[key as keyof Errors] && delete newErrors[key as keyof Errors]
     );
 
     setErrors(newErrors);
@@ -33,30 +34,32 @@ export default function SignInForm() {
   };
 
   return (
-    <AuthForm title="Log in to your account" onSubmit={handleSubmit}>
-      <FormInput
-        label="Email"
-        type="email"
-        value={email}
-        error={errors.email}
-        onChange={setEmail}
-      />
+    <AuthForm title="Login" onSubmit={handleSubmit}>
+      <div className="flex flex-col justify-center items-stretch">
+        <FormInput
+          label="Email"
+          type="email"
+          value={email}
+          error={errors.email}
+          onChange={setEmail}
+        />
 
-      <FormInput
-        label="Password"
-        type="password"
-        value={password}
-        error={errors.password}
-        onChange={setPassword}
-      />
+        <FormInput
+          label="Password"
+          type="password"
+          value={password}
+          error={errors.password}
+          onChange={setPassword}
+        />
 
-      <Button
-        type="submit"
-        variant="contained"
-        sx={{ py: 1.5, backgroundColor: "#28A56A" }}
-      >
-        LOGIN
-      </Button>
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{ py: 1.5, backgroundColor: "#28A56A" }}
+        >
+          LOGIN
+        </Button>
+      </div>
     </AuthForm>
   );
 }
