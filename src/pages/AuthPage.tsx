@@ -17,15 +17,22 @@ export default function AuthPage() {
           className="w-full bg-cover flex justify-center items-center"
           style={{ backgroundImage: `url(${images.signInBg})` }}
         >
-          <div className="text-white flex justify-center items-center brightness-1000">
+          <div className="absolute left-0 top-0 h-1/2 w-full bg-linear-to-b from-[rgba(167,185,255,0.3)]"></div>
+
+          <div className="absolute left-0 bottom-0 h-1/2 w-full bg-linear-to-t from-[rgba(8,14,40,0.6)]"></div>
+          <div className="text-white flex justify-center items-center brightness-1000 ">
             <img
-              className="w-30 mr-2 select-none"
+              className="w-[calc(90px+1vw)] select-none"
               draggable={false}
               src={images.learnTrackLogo}
             />
-            <div className="flex flex-col">
-              <h1 className="text-6xl font-bold leading-8">LearnTrack</h1>
-              <p className="mt-4 text-2xl">Track . Organize . Progress</p>
+            <div className="flex flex-col mt-2">
+              <h1 className="text-shadow-[rgba(255,255,255,.1)] text-shadow-lg text-[calc(40px+1vw)] font-bold leading-8">
+                LearnTrack
+              </h1>
+              <p className="mt-4 text-[calc(5px+1vw)]">
+                Track . Organize . Progress
+              </p>
             </div>
           </div>
         </div>
