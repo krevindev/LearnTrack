@@ -6,7 +6,7 @@ import { images } from "./constants/images";
 function App() {
   return (
     <div
-      className="bg-gray-400 min-w-screen min-h-fit h-screen bg-cover overflow-y-auto bg-fixed"
+      className="bg-gray-400 min-w-screen min-h-fit max-h-screen h-screen bg-cover overflow-y-auto bg-fixed"
       style={{ backgroundImage: `url(${images.signInBg})` }}
     >
       <Routes>
