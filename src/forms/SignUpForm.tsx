@@ -157,7 +157,7 @@ export default function SignUpForm() {
           if (!form.confirmPassword.trim()) {
             setErrors((prev) => ({
               ...prev,
-              confirmPassword: "Username is required",
+              confirmPassword: "Confirm password",
             }));
           } else if (form.confirmPassword.trim() !== form.password) {
             setErrors((prev) => ({
