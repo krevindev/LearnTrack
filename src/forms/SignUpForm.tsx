@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import AuthForm from "../components/AuthForm";
 import FormInput from "../components/FormInput";
 import { required, passwordRule } from "../utils/validation";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signUpWithEmail } from "../services/authServices";
 import { FirebaseError } from "firebase/app";
 import loadingIcon from "../assets/icons/loading-icon.svg";
@@ -22,6 +22,8 @@ type Errors = Partial<State>;
 
 // --- Main Component: Sign-up ---
 export default function SignUpForm() {
+  const navigate = useNavigate();
+
   const [form, setForm] = useState<State>({
     firstName: "",
     lastName: "",
@@ -86,6 +88,9 @@ export default function SignUpForm() {
       });
 
       console.log("Signed up user:", user);
+
+      // On Succesful Sign In
+      navigate("/auth/sign-in");
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
         switch (error.code) {
