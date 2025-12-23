@@ -61,7 +61,9 @@ export default function SignUpForm() {
       username: required(form.username, "Username"),
       password: passwordRule(form.password),
       confirmPassword:
-        form.confirmPassword !== form.password ? "Passwords do not match" : "",
+        form.password.length >= 8 && form.confirmPassword !== form.password
+          ? "Passwords do not match"
+          : "",
     };
 
     Object.keys(newErrors).forEach(
@@ -182,12 +184,12 @@ export default function SignUpForm() {
         error={errors.password}
         onChange={(v) => {
           update("password", v);
-          if (form.password.trim() !== form.confirmPassword) {
-            setErrors((prev) => ({
-              ...prev,
-              confirmPassword: "Passwords do not match",
-            }));
-          }
+          // if (form.password.trim() !== form.confirmPassword) {
+          //   setErrors((prev) => ({
+          //     ...prev,
+          //     confirmPassword: "Passwords do not match",
+          //   }));
+          // }
         }}
         onBlur={() => {
           if (!form.password.trim()) {
@@ -209,7 +211,7 @@ export default function SignUpForm() {
         type="password"
         value={form.confirmPassword}
         error={errors.confirmPassword}
-        disabled={!form.password}
+        disabled={!form.password || form.password.length < 8}
         onChange={(v) => update("confirmPassword", v)}
         onBlur={() => {
           if (!form.confirmPassword.trim()) {
@@ -217,7 +219,10 @@ export default function SignUpForm() {
               ...prev,
               confirmPassword: "Confirm password",
             }));
-          } else if (form.confirmPassword.trim() !== form.password) {
+          } else if (
+            form.confirmPassword.trim() !== form.password &&
+            form.password.length >= 8
+          ) {
             setErrors((prev) => ({
               ...prev,
               confirmPassword: "Passwords do not match",
