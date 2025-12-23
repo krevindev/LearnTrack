@@ -61,7 +61,11 @@ export default function SignInForm() {
           LOGIN
         </Button>
 
-        <Link to="/auth/sign-up" className="text-blue-500 mt-10">
+        <Link
+          to="/auth/sign-up"
+          className="text-blue-500 mt-10 hover:underline active:underline active:translate-y-1"
+        >
+          {" "}
           Create Account
         </Link>
       </div>
