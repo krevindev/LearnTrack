@@ -173,6 +173,11 @@ export default function SignUpForm() {
               ...prev,
               password: "Password is required",
             }));
+          } else if (form.password.length < 8) {
+            setErrors((prev) => ({
+              ...prev,
+              password: "Password must be at least 8 characters",
+            }));
           }
         }}
       />
