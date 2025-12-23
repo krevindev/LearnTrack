@@ -1,7 +1,9 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import SignIn from "./pages/AuthPage";
+import SignInForm from "./forms/SignInForm";
+import SignUpForm from "./forms/SignUpForm";
 import { images } from "./constants/images";
+import AuthLayout from "./layouts/AuthLayout";
 
 function App() {
   return (
@@ -10,7 +12,12 @@ function App() {
       style={{ backgroundImage: `url(${images.signInBg})` }}
     >
       <Routes>
-        <Route path="/" element={<SignIn />} />
+        <Route path="/" element={<Navigate to="/auth" replace />} />
+        <Route path="/auth" element={<AuthLayout />}>
+          <Route index element={<SignInForm />} />
+          <Route path="sign-in" element={<SignInForm />} />
+          <Route path="sign-up" element={<SignUpForm />} />
+        </Route>
       </Routes>
     </div>
   );
