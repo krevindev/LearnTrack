@@ -5,6 +5,7 @@ import FormInput from "../components/FormInput";
 import { required, passwordRule } from "../utils/validation";
 import { Link } from "react-router-dom";
 import { signUpWithEmail } from "../services/authServices";
+import { FirebaseError } from "firebase/app";
 
 // --- Types ---
 type State = {
@@ -80,6 +81,21 @@ export default function SignUpForm() {
 
       console.log("Signed up user:", user);
     } catch (error: unknown) {
+      if (error instanceof FirebaseError) {
+        switch (error.code) {
+          case "auth/email-already-in-use":
+            setErrors({ email: "Email alreadyExists" });
+            break;
+          case "auth/invalid-email":
+            setErrors({ email: "Invalid email format" });
+            break;
+          case "auth/weak-password":
+            setErrors({ password: "Password is too weak" });
+            break;
+          default:
+            setErrors({ email: "Signup failed" });
+        }
+      }
       if (error instanceof Error) {
         console.error(error.message);
       } else {
