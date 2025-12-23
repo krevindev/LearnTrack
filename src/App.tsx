@@ -3,7 +3,7 @@ import "./App.css";
 import SignInForm from "./forms/SignInForm";
 import SignUpForm from "./forms/SignUpForm";
 import { images } from "./constants/images";
-import AuthLayout from "./layouts/AuthLayout";
+import AuthPage from './pages/AuthPage'
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
     >
       <Routes>
         <Route path="/" element={<Navigate to="/auth" replace />} />
-        <Route path="/auth" element={<AuthLayout />}>
+        <Route path="/auth" element={<AuthPage />}>
           <Route index element={<SignInForm />} />
           <Route path="sign-in" element={<SignInForm />} />
           <Route path="sign-up" element={<SignUpForm />} />
