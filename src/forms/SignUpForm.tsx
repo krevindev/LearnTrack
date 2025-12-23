@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import AuthForm from "../components/AuthForm";
 import FormInput from "../components/FormInput";
 import { required, passwordRule } from "../utils/validation";
+import { Link } from "react-router-dom";
 
 type State = {
   firstName: string;
@@ -176,6 +177,12 @@ export default function SignUpForm() {
       >
         SIGN UP
       </Button>
+      <Link
+        to="/auth/sign-in"
+        className="text-blue-500 mt-10 hover:underline active:underline active:translate-y-1"
+      >
+        Already have an account?
+      </Link>
     </AuthForm>
   );
 }
