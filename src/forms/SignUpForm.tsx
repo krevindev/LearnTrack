@@ -241,7 +241,7 @@ export default function SignUpForm() {
       >
         Already have an account?
       </Link>
-      {!isLoading && (
+      {isLoading && (
         <div className="w-full h-full absolute left-0 top-0 bg-[rgba(0,0,0,.5)] backdrop-saturate-50 backdrop-blur-xs flex justify-center items-center">
           <div className="w-40 h-40 flex flex-col justify-center items-center">
             <img
