@@ -1,15 +1,9 @@
 import { Outlet } from "react-router-dom";
-import { useState } from "react";
 import { images } from "../constants/images";
 import useWindowSize from "../hooks/useWindowSize";
-// import SignInForm from "../forms/SignInForm";
-// import SignUpForm from "../forms/SignUpForm";
-
-type Mode = "signIn" | "signUp";
 
 export default function AuthPage() {
   const { width } = useWindowSize();
-  const [mode, setMode] = useState<Mode>("signIn");
 
   return (
     <div className="flex w-full min-h-screen max-h-screen overflow-y-hidden">
@@ -55,20 +49,8 @@ export default function AuthPage() {
           </div>
         )}
         <div className="w-full border flex flex-col justify-center items-center relative">
-          {/* {mode === "signIn" ? <SignInForm /> : <SignUpForm />} */}
-          <Outlet/>
-          <p
-            className="text-blue-500 absolute bottom-5 cursor-pointer mt-5 hover:underline"
-            onClick={() => setMode(mode === "signIn" ? "signUp" : "signIn")}
-          >
-            {mode === "signIn" ? "Create account" : "Already have an account?"}
-          </p>
+          <Outlet />
         </div>
-        {mode === "signIn" && (
-          <p className="absolute bottom-[10%] text-blue-500 mt-32 cursor-pointer hover:underline active:underline active:translate-y-1">
-            Forgot Password?
-          </p>
-        )}
       </div>
     </div>
   );
