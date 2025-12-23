@@ -3,20 +3,20 @@ import { images } from "../constants/images";
 import useWindowSize from "../hooks/useWindowSize";
 
 export default function AuthPage() {
-  const { width } = useWindowSize();
+  const { width: winWidth } = useWindowSize();
 
   return (
     <div className="flex w-full min-h-screen max-h-screen overflow-y-hidden">
       {/* Desktop Title Section (Left) */}
-      {width > 700 && (
+      {winWidth > 700 && (
         <div
           className="w-full bg-cover flex justify-center items-center"
           style={{ backgroundImage: `url(${images.signInBg})` }}
         >
-          <div className="absolute w-full h-full bg-[rgba(0,0,0,0.1)] backdrop-blur-sm"/>
-          <div className="absolute left-0 top-0 h-1/2 w-full bg-linear-to-b from-[rgba(63,102,255,0.3)]"/>
+          <div className="absolute w-full h-full bg-[rgba(0,0,0,0.1)] backdrop-blur-sm" />
+          <div className="absolute left-0 top-0 h-1/2 w-full bg-linear-to-b from-[rgba(63,102,255,0.3)]" />
 
-          <div className="absolute left-0 bottom-0 h-1/2 w-full bg-linear-to-t from-[rgba(8,14,40,0.6)]"/>
+          <div className="absolute left-0 bottom-0 h-1/2 w-full bg-linear-to-t from-[rgba(8,14,40,0.6)]" />
           <div className="text-white flex justify-center items-center brightness-1000">
             <img
               className="w-[calc(90px+1vw)] select-none"
@@ -37,7 +37,7 @@ export default function AuthPage() {
       {/* Form Section (Right)*/}
       <div className="flex flex-col justify-center items-center w-full bg-white relative">
         {/* Mobile Title Banner */}
-        {width <= 700 && (
+        {winWidth <= 700 && (
           <div
             className="sticky left-0 top-0 w-full flex flex-col justify-center items-center font-black text-3xl h-[20%] p-5 py-3 bg-center bg-cover bg-no-repeat z-50"
             style={{ backgroundImage: `url(${images.signInBg})` }}
