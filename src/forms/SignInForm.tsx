@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import AuthForm from "../components/AuthForm";
 import FormInput from "../components/FormInput";
 import { required } from "../utils/validation";
+import { Link } from "react-router-dom";
 
 type Errors = {
   email?: string;
@@ -59,6 +60,10 @@ export default function SignInForm() {
         >
           LOGIN
         </Button>
+
+        <Link to="/auth/sign-up" className="text-blue-500 mt-10">
+          Create Account
+        </Link>
       </div>
     </AuthForm>
   );
