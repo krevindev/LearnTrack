@@ -1,8 +1,9 @@
+import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import { images } from "../constants/images";
 import useWindowSize from "../hooks/useWindowSize";
-import SignInForm from "../forms/SignInForm";
-import SignUpForm from "../forms/SignUpForm";
+// import SignInForm from "../forms/SignInForm";
+// import SignUpForm from "../forms/SignUpForm";
 
 type Mode = "signIn" | "signUp";
 
@@ -54,7 +55,8 @@ export default function AuthPage() {
           </div>
         )}
         <div className="w-full border flex flex-col justify-center items-center relative">
-          {mode === "signIn" ? <SignInForm /> : <SignUpForm />}
+          {/* {mode === "signIn" ? <SignInForm /> : <SignUpForm />} */}
+          <Outlet/>
           <p
             className="text-blue-500 absolute bottom-5 cursor-pointer mt-5 hover:underline"
             onClick={() => setMode(mode === "signIn" ? "signUp" : "signIn")}
