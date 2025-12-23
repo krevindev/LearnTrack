@@ -5,6 +5,7 @@ import FormInput from "../components/FormInput";
 import { required, passwordRule } from "../utils/validation";
 import { Link } from "react-router-dom";
 
+// --- Types ---
 type State = {
   firstName: string;
   lastName: string;
@@ -16,6 +17,7 @@ type State = {
 
 type Errors = Partial<State>;
 
+// --- Main Component: Sign-up ---
 export default function SignUpForm() {
   const [form, setForm] = useState<State>({
     firstName: "",
@@ -33,6 +35,7 @@ export default function SignUpForm() {
     setErrors((e) => ({ ...e, [key]: undefined }));
   };
 
+  // Simple input validation
   const isValid =
     form.firstName &&
     form.lastName &&
@@ -41,9 +44,11 @@ export default function SignUpForm() {
     form.password.length >= 8 &&
     form.password === form.confirmPassword;
 
+  // Handle submit
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Initialize errors
     const newErrors: Errors = {
       firstName: required(form.firstName, "First name"),
       lastName: required(form.lastName, "Last name"),
@@ -67,6 +72,7 @@ export default function SignUpForm() {
 
   return (
     <AuthForm title="Create new account" onSubmit={handleSubmit}>
+      {/* Input: First name */}
       <FormInput
         label="First Name"
         value={form.firstName}
@@ -81,6 +87,7 @@ export default function SignUpForm() {
           }
         }}
       />
+      {/* Input: Last name */}
       <FormInput
         label="Last Name"
         value={form.lastName}
@@ -95,6 +102,7 @@ export default function SignUpForm() {
           }
         }}
       />
+      {/* Input: Email */}
       <FormInput
         label="Email"
         type="email"
@@ -110,6 +118,7 @@ export default function SignUpForm() {
           }
         }}
       />
+      {/* Input: Username */}
       <FormInput
         label="Username"
         value={form.username}
@@ -124,6 +133,7 @@ export default function SignUpForm() {
           }
         }}
       />
+      {/* Input: Password */}
       <FormInput
         label="Password"
         type="password"
@@ -147,6 +157,7 @@ export default function SignUpForm() {
           }
         }}
       />
+      {/* Input: Confirm Password */}
       <FormInput
         label="Confirm Password"
         type="password"
@@ -168,7 +179,7 @@ export default function SignUpForm() {
           }
         }}
       />
-
+      {/* Button: Submit */}
       <Button
         type="submit"
         variant="contained"
@@ -177,6 +188,7 @@ export default function SignUpForm() {
       >
         SIGN UP
       </Button>
+      {/* Link to: Sign In */}
       <Link
         to="/auth/sign-in"
         className="text-blue-500 mt-10 hover:underline active:underline active:translate-y-1"
