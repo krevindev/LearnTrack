@@ -4,6 +4,7 @@ import AuthForm from "../components/AuthForm";
 import FormInput from "../components/FormInput";
 import { required, passwordRule } from "../utils/validation";
 import { Link } from "react-router-dom";
+import { signUpWithEmail } from "../services/authServices";
 
 // --- Types ---
 type State = {
@@ -45,7 +46,7 @@ export default function SignUpForm() {
     form.password === form.confirmPassword;
 
   // Handle submit
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Initialize errors
@@ -67,7 +68,25 @@ export default function SignUpForm() {
     setErrors(newErrors);
     if (Object.keys(newErrors).length) return;
 
-    console.log("Sign up valid");
+    // console.log("Sign up valid");
+    try {
+      const user = await signUpWithEmail({
+        firstName: form.firstName,
+        lastName: form.lastName,
+        username: form.username,
+        email: form.email,
+        password: form.password,
+      });
+
+      console.log("Signed up user:", user);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error("Unknown error occured");
+      }
+      // show error to front-end later
+    }
   };
 
   return (
