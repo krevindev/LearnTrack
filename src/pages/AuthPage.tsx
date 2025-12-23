@@ -13,7 +13,7 @@ export default function AuthPage() {
           style={{ backgroundImage: `url(${images.signInBg})` }}
         >
           <div className="absolute w-full h-full bg-[rgba(0,0,0,0.1)] backdrop-blur-sm"></div>
-          <div className="absolute left-0 top-0 h-1/2 w-full bg-linear-to-b from-[rgba(167,185,255,0.3)]"></div>
+          <div className="absolute left-0 top-0 h-1/2 w-full bg-linear-to-b from-[rgba(63,102,255,0.3)]"></div>
 
           <div className="absolute left-0 bottom-0 h-1/2 w-full bg-linear-to-t from-[rgba(8,14,40,0.6)]"></div>
           <div className="text-white flex justify-center items-center brightness-1000">
