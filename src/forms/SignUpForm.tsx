@@ -3,10 +3,11 @@ import Button from "@mui/material/Button";
 import AuthForm from "../components/AuthForm";
 import FormInput from "../components/FormInput";
 import { required, passwordRule } from "../utils/validation";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { signUpWithEmail } from "../services/authServices";
 import { FirebaseError } from "firebase/app";
 import loadingIcon from "../assets/icons/loading-icon.svg";
+import FlashMessage from "../components/FlashMessage";
 
 // --- Types ---
 type State = {
@@ -18,11 +19,13 @@ type State = {
   confirmPassword: string;
 };
 
+type FlashMessageType = "successful" | "error" | null;
+
 type Errors = Partial<State>;
 
 // --- Main Component: Sign-up ---
 export default function SignUpForm() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [form, setForm] = useState<State>({
     firstName: "",
@@ -34,6 +37,7 @@ export default function SignUpForm() {
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [flashMessage, setFlashMessage] = useState<FlashMessageType>("error");
 
   const [errors, setErrors] = useState<Errors>({});
 
@@ -90,7 +94,8 @@ export default function SignUpForm() {
       console.log("Signed up user:", user);
 
       // On Succesful Sign In
-      navigate("/auth/sign-in");
+      // navigate("/auth/sign-in");
+      setFlashMessage("successful");
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
         switch (error.code) {
@@ -113,6 +118,7 @@ export default function SignUpForm() {
         console.error("Unknown error occured");
       }
       // show error to front-end later
+      setFlashMessage("error");
     } finally {
       setIsLoading(false);
     }
@@ -264,6 +270,7 @@ export default function SignUpForm() {
           </div>
         </div>
       )}
+      {flashMessage && <FlashMessage messageType={flashMessage} />}
     </AuthForm>
   );
 }
