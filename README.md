@@ -38,4 +38,4 @@ Open http://localhost:5173 in your browser
 
 ## Status
 [!] This project is under development
-[-] Working on the login page and authentication
+[-] Currently working on the registration and authentication feature 
