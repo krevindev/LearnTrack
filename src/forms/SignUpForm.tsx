@@ -19,7 +19,7 @@ type State = {
   confirmPassword: string;
 };
 
-type FlashMessageType = "successful" | "error" | null;
+type FlashType = "success" | "error";
 
 type Errors = Partial<State>;
 
@@ -37,7 +37,7 @@ export default function SignUpForm() {
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [flashMessage, setFlashMessage] = useState<FlashMessageType>("error");
+  const [flashType, setFlashType] = useState<FlashType | null>("success");
 
   const [errors, setErrors] = useState<Errors>({});
 
@@ -95,7 +95,7 @@ export default function SignUpForm() {
 
       // On Succesful Sign In
       // navigate("/auth/sign-in");
-      setFlashMessage("successful");
+      setFlashType("success");
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
         switch (error.code) {
@@ -118,7 +118,7 @@ export default function SignUpForm() {
         console.error("Unknown error occured");
       }
       // show error to front-end later
-      setFlashMessage("error");
+      setFlashType("error");
     } finally {
       setIsLoading(false);
     }
@@ -270,7 +270,7 @@ export default function SignUpForm() {
           </div>
         </div>
       )}
-      {flashMessage && <FlashMessage messageType={flashMessage} />}
+      {flashType !== null && <FlashMessage type={flashType} />}
     </AuthForm>
   );
 }
