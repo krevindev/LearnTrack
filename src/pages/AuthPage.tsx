@@ -17,7 +17,7 @@ export default function AuthPage() {
           <div className="absolute left-0 top-0 h-1/2 w-full bg-linear-to-b from-[rgba(63,102,255,0.3)]" />
 
           <div className="absolute left-0 bottom-0 h-1/2 w-full bg-linear-to-t from-[rgba(8,14,40,0.6)]" />
-          <div className="text-white border-t-0 border-[rgba(255,255,255,.05)] border-2 px-15 py-12 rounded-4xl flex justify-center items-center flex-col backdrop-blur-xl">
+          <div className="text-white border-t-0 border-[rgba(255,255,255,.05)] border-2 px-15 py-12 rounded-4xl flex justify-center items-center flex-col backdrop-blur-xl shadow-2xl">
             <img
               className="w-[calc(90px+1vw)] select-none brightness-1000 pb-3"
               draggable={false}
