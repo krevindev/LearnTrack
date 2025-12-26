@@ -7,6 +7,7 @@ type MessageType = "success" | "error";
 
 type FlashMessageProps = {
   type: MessageType;
+  onClose: () => void;
 };
 
 const MESSAGE_CONFIG: Record<
@@ -38,7 +39,7 @@ const MESSAGE_CONFIG: Record<
   },
 };
 
-export default function FlashMessage({ type }: FlashMessageProps) {
+export default function FlashMessage({ type, onClose }: FlashMessageProps) {
   const config = MESSAGE_CONFIG[type];
 
   return (
@@ -54,6 +55,7 @@ export default function FlashMessage({ type }: FlashMessageProps) {
 
         <Link to={config.redirect}>
           <Button
+            onClick={onClose}
             variant="contained"
             sx={{ py: 1, mt: 5, backgroundColor: config.color }}
           >

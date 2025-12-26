@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import AuthForm from "../components/AuthForm";
 import FormInput from "../components/FormInput";
 import { required, passwordRule } from "../utils/validation";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signUpWithEmail } from "../services/authServices";
 import { FirebaseError } from "firebase/app";
 import loadingIcon from "../assets/icons/loading-icon.svg";
@@ -25,7 +25,7 @@ type Errors = Partial<State>;
 
 // --- Main Component: Sign-up ---
 export default function SignUpForm() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [form, setForm] = useState<State>({
     firstName: "",
@@ -37,9 +37,17 @@ export default function SignUpForm() {
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [flashType, setFlashType] = useState<FlashType | null>("success");
+  const [flashType, setFlashType] = useState<FlashType | null>(null);
 
   const [errors, setErrors] = useState<Errors>({});
+
+  const closeFlash = () => {
+    setFlashType(null);
+
+    if (flashType === "success") {
+      navigate("/auth/sign-in");
+    }
+  };
 
   const update = (key: keyof State, value: string) => {
     setForm((p) => ({ ...p, [key]: value }));
@@ -270,7 +278,9 @@ export default function SignUpForm() {
           </div>
         </div>
       )}
-      {flashType !== null && <FlashMessage type={flashType} />}
+      {flashType !== null && (
+        <FlashMessage type={flashType} onClose={closeFlash} />
+      )}
     </AuthForm>
   );
 }
