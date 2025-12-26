@@ -35,7 +35,7 @@ export default function AuthPage() {
         </div>
       )}
       {/* Form Section (Right)*/}
-      <div className="flex flex-col justify-center items-center w-full bg-white relative p-0">
+      <div className="flex flex-col justify-center items-center w-full xl:px-10 xl:w-[50%] bg-white relative p-0">
         {/* Mobile Title Banner */}
         {winWidth <= 700 && (
           <div
