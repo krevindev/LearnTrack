@@ -37,7 +37,7 @@ export default function SignUpForm() {
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [flashType, setFlashType] = useState<FlashType | null>("success");
+  const [flashType, setFlashType] = useState<FlashType | null>(null);
 
   const [errors, setErrors] = useState<Errors>({});
 
