@@ -13,18 +13,18 @@ export default function AuthPage() {
           className="w-full bg-cover flex justify-center items-center"
           style={{ backgroundImage: `url(${images.signInBg})` }}
         >
-          <div className="absolute w-full h-full bg-[rgba(0,0,0,0.1)] backdrop-blur-sm" />
+          <div className="absolute w-full h-full bg-[rgba(0,0,0,0.1)]" />
           <div className="absolute left-0 top-0 h-1/2 w-full bg-linear-to-b from-[rgba(63,102,255,0.3)]" />
 
           <div className="absolute left-0 bottom-0 h-1/2 w-full bg-linear-to-t from-[rgba(8,14,40,0.6)]" />
-          <div className="text-white border border-[rgba(255,255,255,.3)] px-10 py-5 rounded-lg flex justify-center items-center brightness-1000">
+          <div className="text-white border-t-0 border-[rgba(255,255,255,.05)] border-2 px-15 py-12 rounded-4xl flex justify-center items-center flex-col backdrop-blur-xl">
             <img
-              className="w-[calc(90px+1vw)] select-none"
+              className="w-[calc(90px+1vw)] select-none brightness-1000 pb-3"
               draggable={false}
               src={images.learnTrackLogo}
             />
-            <div className="flex flex-col mt-2 backdrop-blur-2xl">
-              <h1 className="text-shadow-[rgba(255,255,255,.1)] text-shadow-lg text-[calc(40px+1vw)] leading-8 select-none">
+            <div className="flex flex-col mt-2">
+              <h1 className="text-[calc(40px+1vw)] leading-8 select-none text-white">
                 <span className="font-black">Learn</span>Track
               </h1>
               <p className="mt-4 text-[calc(5px+1vw)] select-none">
