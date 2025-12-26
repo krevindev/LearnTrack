@@ -3,7 +3,8 @@ import "./App.css";
 import SignInForm from "./forms/SignInForm";
 import SignUpForm from "./forms/SignUpForm";
 import { images } from "./constants/images";
-import AuthPage from './pages/AuthPage'
+import AuthPage from "./pages/AuthPage";
+import Home from "./pages/Home";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="sign-in" element={<SignInForm />} />
           <Route path="sign-up" element={<SignUpForm />} />
         </Route>
+        <Route path="/home" element={<Home />} />
       </Routes>
     </div>
   );
