@@ -35,7 +35,7 @@ export default function AuthPage() {
         </div>
       )}
       {/* Form Section (Right)*/}
-      <div className="flex flex-col justify-center items-center w-full bg-white relative">
+      <div className="flex flex-col justify-center items-center w-full bg-white relative p-0">
         {/* Mobile Title Banner */}
         {winWidth <= 700 && (
           <div
@@ -49,7 +49,7 @@ export default function AuthPage() {
             </p>
           </div>
         )}
-        <div className="w-full border flex flex-col justify-center items-center relative">
+        <div className="w-full h-full border flex flex-col justify-center items-center relative p-0">
           {/* Sign In/Sign Up Form Outlet */}
           <Outlet />
         </div>
