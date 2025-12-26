@@ -1,7 +1,12 @@
 import { auth, db } from "../firebase/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 
+// Types
 type SignUpData = {
   firstName: string;
   lastName: string;
@@ -10,6 +15,7 @@ type SignUpData = {
   password: string;
 };
 
+// SIGN UP
 export async function signUpWithEmail(data: SignUpData) {
   // Create user in Firebase Auth
   const userCredential = await createUserWithEmailAndPassword(
@@ -30,4 +36,16 @@ export async function signUpWithEmail(data: SignUpData) {
   });
 
   return user;
+}
+
+// SIGN IN
+export async function loginWithEmail(email: string, password: string) {
+  const cred = await signInWithEmailAndPassword(auth, email, password);
+
+  return cred.user;
+}
+
+// SIGN OUT
+export async function logoutUser() {
+  await signOut;
 }
