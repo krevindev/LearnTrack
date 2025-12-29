@@ -19,15 +19,15 @@ export const useAuthStore = create<AuthState>((set) => ({
   login: async (email, password) => {
     set({ loading: true, error: null });
 
-    try{
-        const user = await loginWithEmail(email, password);
-        set({user, loading: false})
-    }catch(err: any){
-        set({error: err.message ?? 'Login Failed', loadingL false})
+    try {
+      const user = await loginWithEmail(email, password);
+      set({ user, loading: false });
+    } catch (err: any) {
+      set({ error: err.message ?? "Login Failed", loading: false });
     }
-},
-logout: async () => {
-        await logoutUser();
-        set({user: null})
-    }
+  },
+  logout: async () => {
+    await logoutUser();
+    set({ user: null });
+  },
 }));
