@@ -6,7 +6,7 @@ import {
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 
-// Types
+// --- Types ---
 type SignUpData = {
   firstName: string;
   lastName: string;
