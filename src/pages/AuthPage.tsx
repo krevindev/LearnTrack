@@ -36,20 +36,20 @@ export default function AuthPage() {
       )}
       {/* Form Section (Right)*/}
       <div className="flex flex-col justify-center items-center w-full xl:px-10 xl:w-[50%] bg-white relative p-0">
-        {/* Mobile Title Banner */}
-        {winWidth <= 700 && (
-          <div
-            className="sticky left-0 top-0 w-full flex flex-col justify-center items-center font-black text-3xl h-[20%] p-5 py-3 bg-center bg-cover bg-no-repeat z-50"
-            style={{ backgroundImage: `url(${images.signInBg})` }}
-          >
-            <h2>LearnTrack</h2>
-            <p className="text-xs text-center m-2 font-normal">
-              Track your learning. Organize your skills. <br />
-              See your progress
-            </p>
-          </div>
-        )}
-        <div className="w-full h-full border flex flex-col justify-center items-center relative p-0">
+        <div className="w-full h-full flex flex-col justify-start items-center relative p-0 overflow-y-auto">
+          {/* Mobile Title Banner */}
+          {winWidth <= 700 && (
+            <div
+              className="sticky left-0 top-0 w-full flex flex-col justify-center items-center font-black text-3xl h-[20%] p-5 py-3 bg-center bg-cover bg-no-repeat z-50"
+              style={{ backgroundImage: `url(${images.signInBg})` }}
+            >
+              <h2>LearnTrack</h2>
+              <p className="text-xs text-center m-2 font-normal">
+                Track your learning. Organize your skills. <br />
+                See your progress
+              </p>
+            </div>
+          )}
           {/* Sign In/Sign Up Form Outlet */}
           <Outlet />
         </div>
