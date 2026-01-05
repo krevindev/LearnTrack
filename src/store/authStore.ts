@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Auth, User } from "firebase/auth";
+import { User } from "firebase/auth";
 import { loginWithEmail, logoutUser } from "../services/authServices";
 
 type AuthState = {
