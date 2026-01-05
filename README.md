@@ -37,5 +37,5 @@ npm run dev
 Open http://localhost:5173 in your browser
 
 ## Status
-[!] This project is under development
+[!] This project is under development  
 [-] Currently working on the registration and authentication feature 
